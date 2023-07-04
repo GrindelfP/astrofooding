@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import to.grindelf.astrofooding.dietlogics.DietProcessor
-import to.grindelf.astrofooding.entities.Astronaut
-import to.grindelf.astrofooding.entities.Macronutrients
-import to.grindelf.astrofooding.entities.Results
+import to.grindelf.astrofooding.domain.Astronaut
+import to.grindelf.astrofooding.domain.Macronutrients
+import to.grindelf.astrofooding.domain.Diet
 
 @RestController
 @RequestMapping("/optimal-diet")
@@ -20,8 +20,7 @@ class Controllers {
             @RequestParam weight: Int,
             @RequestParam height: Int,
             @RequestParam gender: String
-    ): Results {
-
+    ): Diet {
         val astronaut = Astronaut(name, age, weight, height, gender)
         val dietProcessor = DietProcessor(astronaut)
 

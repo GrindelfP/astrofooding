@@ -1,7 +1,9 @@
 package to.grindelf.astrofooding.dietlogics
 
-import to.grindelf.astrofooding.entities.*
-import to.grindelf.astrofooding.utility.SimplexSolver
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.kotlinModule
+import com.fasterxml.jackson.module.kotlin.readValue
+import to.grindelf.astrofooding.domain.*
 import java.io.File
 
 /**
@@ -61,7 +63,7 @@ class DietProcessor(
      * Calculates optimal diet for an astronaut
      * @return Results
      */
-    fun calculateOptimalDiet(): Results {
+    fun calculateOptimalDiet(): Diet {
         val limits = listOf(
             macronutrientsToFit.protein,
             macronutrientsToFit.fat,
@@ -70,7 +72,7 @@ class DietProcessor(
 
         val matrix = mutableListOf<List<Double>>()
 
-        val menu = getMenuFrom()
+        val menu = getMenu()
         menu.forEach { meal ->
             matrix.add(
                 listOf(
@@ -81,7 +83,8 @@ class DietProcessor(
             )
         } // declare matrix of macronutrients for each meal of the menu
 
-        val simplexSolutions = SimplexSolver.solve(matrix, limits) // solve the problem
+        // val simplexSolutions = SimplexSolver.solve(matrix, limits) // solve the problem
+        val simplexSolutions = listOf(2, 0, 1, 1)
 
         val mealsByQuantity = mutableListOf<MealByQuantity>()
 
@@ -93,7 +96,7 @@ class DietProcessor(
             )
         } // create a list of meals with their quantities
 
-        return Results(
+        return Diet(
             astronaut = astronaut,
             macronutrients = macronutrientsToFit,
             mealsByQuantity = mealsByQuantity
@@ -104,7 +107,12 @@ class DietProcessor(
      * Returns a menu of meals read from JSON file
      * @return List<Meal>
      */
-    private fun getMenuFrom(): List<Meal> {
-        TODO("Not yet implemented")
+    private fun getMenu(): List<Meal> {
+        val dataAsText = MENU_FILE.readText()
+
+        fun objectMapper(): ObjectMapper = ObjectMapper().registerModule(kotlinModule())
+        val mapper: ObjectMapper = objectMapper()
+
+        return mapper.readValue<List<Meal>>(dataAsText)
     }
 }

@@ -1,4 +1,4 @@
-package to.grindelf.astrofooding.entities
+package to.grindelf.astrofooding.domain
 
 data class Astronaut(
         val name: String,

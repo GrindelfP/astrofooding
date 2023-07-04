@@ -1,4 +1,4 @@
-package to.grindelf.astrofooding.entities
+package to.grindelf.astrofooding.domain
 
 /**
  * Class representing a meal with its macronutrients and weight.
@@ -14,7 +14,7 @@ data class Meal(
 /**
  * Class encapsulating the results of the optimal diet calculation.
  */
-data class Results(
+data class Diet(
         val astronaut: Astronaut,
         val macronutrients: Macronutrients,
         val mealsByQuantity: List<MealByQuantity>
