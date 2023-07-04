@@ -17,7 +17,12 @@ class DietProcessor(
     /**
      * Amount of macronutrients that are optimal for the astronaut
      */
-    private val optimalMacronutrients: Macronutrients
+    private val optimalMacronutrients: Macronutrients = calculateOptimalMacronutrients()
+
+    /**
+     * Menu file
+     */
+    private val menuFile = File("src/main/resources/menus/menu1.json")
 
     companion object {
 
@@ -29,15 +34,6 @@ class DietProcessor(
          * microgravity)
          */
         private const val ACTIVITY_FACTOR = 1.725
-
-        /**
-         * Menu file
-         */
-        private val MENU_FILE = File("src/main/resources/menus/menu1.json")
-    }
-
-    init {
-        optimalMacronutrients = calculateOptimalMacronutrients()
     }
 
     /**
@@ -102,7 +98,7 @@ class DietProcessor(
      * @return List<Meal>
      */
     private fun getMenu(): List<Meal> {
-        val dataAsText = MENU_FILE.readText()
+        val dataAsText = menuFile.readText()
 
         fun objectMapper(): ObjectMapper = ObjectMapper().registerModule(kotlinModule())
         val mapper: ObjectMapper = objectMapper()
