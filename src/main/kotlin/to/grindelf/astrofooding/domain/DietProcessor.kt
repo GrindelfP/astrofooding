@@ -1,9 +1,8 @@
-package to.grindelf.astrofooding.dietlogics
+package to.grindelf.astrofooding.domain
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import to.grindelf.astrofooding.domain.*
 import to.grindelf.astrofooding.utility.SimplexSolver
 import java.io.File
 
@@ -56,7 +55,8 @@ class DietProcessor(
         val limits = initializeLimits() // declare limits for each macronutrient
         val menu = getMenu() // read menu from JSON file
         val matrix = initializeMatrix(menu) // declare matrix of macronutrients for each meal of the menu
-        val simplexSolutions = SimplexSolver.solve(matrix, limits) // solve the problem
+        val simplexSolutions = SimplexSolver.solve(matrix, limits, getMinimizers(menu)) // solve the problem
+        require(simplexSolutions != null) { "The problem has no solution" }
         val mealsByQuantity = getQuantifiedMeals(simplexSolutions) // create a list of meals with their quantities
 
         return Diet(
@@ -126,17 +126,42 @@ class DietProcessor(
     private fun initializeMatrix(menu: List<Meal>): List<List<Double>> {
         val matrix = mutableListOf<List<Double>>()
 
-        menu.forEach { meal ->
-            matrix.add(
-                listOf(
-                    meal.protein,
-                    meal.fat,
-                    meal.carbs
-                )
-            )
+        val listOfProteins = mutableListOf<Double>()
+
+        menu.forEach {meal ->
+            listOfProteins.add(meal.protein)
         }
 
+        matrix.add(listOfProteins)
+
+        val listOfFats = mutableListOf<Double>()
+
+        menu.forEach {meal ->
+            listOfFats.add(meal.fat)
+        }
+
+        matrix.add(listOfFats)
+
+        val listOfCarbs = mutableListOf<Double>()
+
+        menu.forEach {meal ->
+            listOfCarbs.add(meal.carbs)
+        }
+
+        matrix.add(listOfCarbs)
+
         return matrix
+    }
+
+    /**
+     * Creates vector of minimization factors for minimizing the system
+     */
+    private fun getMinimizers(menu: List<Meal>): List<Double> {
+        val minimizers = mutableListOf<Double>()
+        menu.forEach {meal ->
+            minimizers.add(meal.weight)
+        }
+        return minimizers
     }
 
     /**

@@ -8,7 +8,7 @@ data class Meal(
         val protein: Double,
         val fat: Double,
         val carbs: Double,
-        val weight: Int
+        val weight: Double
 )
 
 /**

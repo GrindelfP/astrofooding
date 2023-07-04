@@ -1,30 +1,30 @@
 [
   {
     "name": "Mashed potatoes",
-    "protein": 25,
-    "fat": 42,
-    "carbs": 147,
-    "weight": 300
+    "protein": 7,
+    "fat": 5,
+    "carbs": 1,
+    "weight": 2
   },
   {
     "name": "Meat cutlet",
-    "protein": 10,
-    "fat": 18,
-    "carbs": 6,
-    "weight": 100
+    "protein": 3,
+    "fat": 3,
+    "carbs": 7,
+    "weight": 3
   },
   {
     "name": "Beef stake",
-    "protein": 190,
-    "fat": 50,
-    "carbs": 0,
-    "weight": 500
+    "protein": 9,
+    "fat": 2,
+    "carbs": 3,
+    "weight": 4
   },
   {
     "name": "Roasted pork",
-    "protein": 106,
-    "fat": 209,
-    "carbs": 7,
-    "weight": 450
+    "protein": 11,
+    "fat": 6,
+    "carbs": 8,
+    "weight": 5
   }
 ]
