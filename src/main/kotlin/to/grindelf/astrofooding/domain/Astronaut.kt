@@ -5,5 +5,5 @@ data class Astronaut(
         val age: Int,
         val weight: Int,
         val height: Int,
-        var gender: String
+        val gender: String
 )
