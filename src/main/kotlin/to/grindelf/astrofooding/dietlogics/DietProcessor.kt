@@ -13,7 +13,6 @@ import java.io.File
 class DietProcessor(
     private val astronaut: Astronaut
 ) {
-
     /**
      * Amount of macronutrients that are optimal for the astronaut
      */
@@ -67,6 +66,9 @@ class DietProcessor(
         )
     }
 
+    /**
+     * Calculates optimal calories count for an astronaut
+     */
     private fun calculateCalories(): Double = when (astronaut.gender) {
         "male" -> (66.5 + 13.75 * astronaut.weight + 5.003 * astronaut.height -
                 6.755 * astronaut.age) * ACTIVITY_FACTOR
@@ -77,16 +79,28 @@ class DietProcessor(
         else -> throw IllegalArgumentException("This gender is not supported yet")
     }
 
+    /**
+     * Calculates optimal proteins count for an astronaut
+     */
     private fun calculateProteins(): Double = astronaut.weight * 2.2 * 1.2
 
+    /**
+     * Calculates optimal fats count for an astronaut
+     */
     private fun calculateFats(calories: Double): Double = calories * 0.3 / 9
 
+    /**
+     * Calculates optimal carbs count for an astronaut
+     */
     private fun calculateCarbs(
         calories: Double,
         proteins: Double,
         fats: Double
     ): Double = (calories - proteins * 4 - fats * 9) / 4
 
+    /**
+     * Initializes limits for each macronutrient
+     */
     private fun initializeLimits(): List<Double> = listOf(
         optimalMacronutrients.protein,
         optimalMacronutrients.fat,
@@ -106,6 +120,9 @@ class DietProcessor(
         return mapper.readValue<List<Meal>>(dataAsText)
     }
 
+    /**
+     * Initializes matrix of macronutrients for each meal of the menu for further simplex calculations
+     */
     private fun initializeMatrix(menu: List<Meal>): List<List<Double>> {
         val matrix = mutableListOf<List<Double>>()
 
@@ -122,6 +139,9 @@ class DietProcessor(
         return matrix
     }
 
+    /**
+     * Creates a list of meals with their quantities
+     */
     private fun getQuantifiedMeals(simplexSolutions: List<Int>): List<MealByQuantity> {
         val mealsByQuantity = mutableListOf<MealByQuantity>()
 
