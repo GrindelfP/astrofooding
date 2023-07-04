@@ -4,8 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import to.grindelf.astrofooding.dietlogics.DietProcessor.calculateOptimalMacronutrients
-import to.grindelf.astrofooding.dietlogics.DietProcessor.calculateOptimalDiet
+import to.grindelf.astrofooding.dietlogics.DietProcessor
 import to.grindelf.astrofooding.entities.Astronaut
 import to.grindelf.astrofooding.entities.Macronutrients
 import to.grindelf.astrofooding.entities.Results
@@ -24,9 +23,9 @@ class Controllers {
     ): Results {
 
         val astronaut = Astronaut(name, age, weight, height, gender)
-        val optimalMacronutrients = calculateOptimalMacronutrients(astronaut)
+        val dietProcessor = DietProcessor(astronaut)
 
-        return calculateOptimalDiet(optimalMacronutrients)
+        return dietProcessor.calculateOptimalDiet()
     }
 
     @GetMapping("/test-astronaut")
@@ -50,6 +49,6 @@ class Controllers {
     ): Macronutrients {
         val astronaut = Astronaut(name, age, weight, height, gender)
 
-        return calculateOptimalMacronutrients(astronaut)
+        return DietProcessor(astronaut).calculateOptimalMacronutrients()
     }
 }
