@@ -29,6 +29,7 @@ class Controllers {
         return dietProcessor.calculateOptimalDiet()
     }
 
+    @CrossOrigin
     @GetMapping("/test-astronaut")
     fun testAstronaut(
             @RequestParam name: String,
@@ -40,6 +41,7 @@ class Controllers {
         return Astronaut(name, age, weight, height, gender)
     }
 
+    @CrossOrigin
     @GetMapping("/test-components")
     fun testMacronutrients(
             @RequestParam name: String,
