@@ -12,16 +12,34 @@ object SimplexToolkit {
     /**
      * Solves a linear programming problem using the simplex method.
      */
-    fun solve(matrix: List<List<Double>>, limits: List<Double>, minimizers: List<Double>): List<Int> {
-
-        // TODO: DEBUG
-        println("Matrix: $matrix")
-        println("Limits: $limits")
-        println("Minimizers: $minimizers")
+    fun solve(
+        matrix: List<List<Double>>,
+        limits: List<Double>,
+        minimizers: List<Double>,
+        boundaries: SolutionBoundaries = SolutionBoundaries(0.0, Double.MAX_VALUE)
+    ): List<Int> {
 
         val coefficients: DoubleArray = objectiveFunctionCoefficients(minimizers)
         val constraints: ArrayList<LinearConstraint> = constraints(matrix, limits)
         val function = LinearObjectiveFunction(coefficients, 0.0)
+
+
+        for (i in matrix.indices) {
+            constraints.add(
+                LinearConstraint(
+                    DoubleArray(matrix.size) { if (it == i) 1.0 else 0.0 },
+                    Relationship.GEQ,
+                    boundaries.lowerBound
+                )
+            )
+            constraints.add(
+                LinearConstraint(
+                    DoubleArray(matrix.size) { if (it == i) 1.0 else 0.0 },
+                    Relationship.LEQ,
+                    boundaries.upperBound
+                )
+            )
+        }
 
 
         val solution: PointValuePair = SimplexSolver().optimize(
@@ -32,12 +50,7 @@ object SimplexToolkit {
             MaxIter(100)
         )
 
-        // TODO: DEBUG
-        print("Solutions: ")
-        solution.point.forEach { print("$it ") }
-        println()
-
-        return solution.point.map { xi -> roundToUpperInt(xi)}
+        return solution.point.map { xi -> roundToUpperInt(xi) }
     }
 
     private fun roundToUpperInt(xi: Double): Int {
@@ -58,7 +71,6 @@ object SimplexToolkit {
      * Creates an array list of constraints for the simplex solver
      */
     private fun constraints(matrix: List<List<Double>>, limits: List<Double>): ArrayList<LinearConstraint> {
-        // TODO: AI
         val constraints = arrayListOf<LinearConstraint>()
 
         // Define the constraints
@@ -69,5 +81,7 @@ object SimplexToolkit {
 
         return constraints
     }
+
+    data class SolutionBoundaries(val lowerBound: Double, val upperBound: Double)
 }
 

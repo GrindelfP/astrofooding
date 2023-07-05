@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Baked Ranch Chicken with Broccoli & Bacon",
+    "protein": 30,
+    "fat": 20,
+    "carbs": 10,
+    "weight": 200
+  },
+  {
+    "name": "Crock Pot Low Carb Keto Taco Casserole",
+    "protein": 25,
+    "fat": 15,
+    "carbs": 10,
+    "weight": 200
+  },
+  {
+    "name": "Quinoa with Cooked Chicken",
+    "protein": 30,
+    "fat": 10,
+    "carbs": 40,
+    "weight": 250
+  },
+  {
+    "name": "Oats with Nuts",
+    "protein": 20,
+    "fat": 15,
+    "carbs": 60,
+    "weight": 200
+  },
+  {
+    "name": "Stuffed Chicken Breasts with Goat Cheese and Spinach",
+    "protein": 28,
+    "fat": 15,
+    "carbs": 5.8,
+    "weight": 200
+  },
+  {
+    "name": "Slow-cooked oatmeal with egg whites",
+    "protein": 20,
+    "fat": 5,
+    "carbs": 60,
+    "weight": 350
+  },
+  {
+    "name": "Breakfast burrito with whole-wheat tortilla, eggs, and low-fat cheese",
+    "protein": 25,
+    "fat": 10,
+    "carbs": 50,
+    "weight": 200
+  },
+  {
+    "name": "Whole-grain pancakes topped with blueberries and low-sugar syrup served with lean turkey sausages",
+    "protein": 30,
+    "fat": 15,
+    "carbs": 80,
+    "weight": 400
+  },
+  {
+    "name": "Whole-grain sandwiches with lean deli meat",
+    "protein": 35,
+    "fat": 10,
+    "carbs": 70,
+    "weight": 250
+  },
+  {
+    "name": "Vegetable-based soups and stews with lean poultry",
+    "protein": 30,
+    "fat": 10,
+    "carbs": 40,
+    "weight": 300
+  },
+  {
+    "name": "Grilled Chicken with Quinoa and Avocado",
+    "protein": 35,
+    "fat": 15,
+    "carbs": 45,
+    "weight": 300
+  },
+  {
+    "name": "Tofu Stir Fry with Brown Rice",
+    "protein": 25,
+    "fat": 10,
+    "carbs": 55,
+    "weight": 250
+  },
+  {
+    "name": "Beef and Bean Chili",
+    "protein": 30,
+    "fat": 15,
+    "carbs": 40,
+    "weight": 350
+  },
+  {
+    "name": "Salmon with Sweet Potato",
+    "protein": 40,
+    "fat": 20,
+    "carbs": 50,
+    "weight": 300
+  },
+  {
+    "name": "Turkey Meatballs with Whole Wheat Spaghetti",
+    "protein": 35,
+    "fat": 15,
+    "carbs": 60,
+    "weight": 400
+  },
+  {
+    "name": "Lentil Soup with Whole Grain Bread",
+    "protein": 25,
+    "fat": 10,
+    "carbs": 50,
+    "weight": 350
+  },
+  {
+    "name": "Egg and Vegetable Frittata",
+    "protein": 30,
+    "fat": 15,
+    "carbs": 40,
+    "weight": 200
+  },
+  {
+    "name": "Greek Yogurt with Granola and Berries",
+    "protein": 20,
+    "fat": 10,
+    "carbs": 55,
+    "weight": 250
+  },
+  {
+    "name": "Peanut Butter and Banana Smoothie",
+    "protein": 25,
+    "fat": 15,
+    "carbs": 60,
+    "weight": 300
+  },
+  {
+    "name": "Black Bean and Cheese Burrito",
+    "protein": 30,
+    "fat": 20,
+    "carbs": 50,
+    "weight": 250
+  },
+    {
+      "name": "Chicken and Rice Casserole",
+      "protein": 30,
+      "fat": 15,
+      "carbs": 55,
+      "weight": 350
+    },
+    {
+      "name": "Lentil and Vegetable Curry with Brown Rice",
+      "protein": 25,
+      "fat": 10,
+      "carbs": 60,
+      "weight": 300
+    },
+    {
+      "name": "Turkey and Avocado Wrap",
+      "protein": 35,
+      "fat": 15,
+      "carbs": 50,
+      "weight": 200
+    },
+    {
+      "name": "Tuna Salad with Whole Grain Bread",
+      "protein": 30,
+      "fat": 10,
+      "carbs": 45,
+      "weight": 250
+    },
+    {
+      "name": "Beef and Vegetable Stir Fry",
+      "protein": 40,
+      "fat": 20,
+      "carbs": 55,
+      "weight": 300
+    },
+    {
+      "name": "Egg and Spinach Omelette",
+      "protein": 25,
+      "fat": 15,
+      "carbs": 40,
+      "weight": 200
+    },
+    {
+      "name": "Peanut Butter and Jelly Sandwich",
+      "protein": 20,
+      "fat": 10,
+      "carbs": 60,
+      "weight": 150
+    },
+    {
+      "name": "Protein Shake with Banana and Oats",
+      "protein": 30,
+      "fat": 10,
+      "carbs": 50,
+      "weight": 250
+    },
+    {
+      "name": "Chicken and Vegetable Pasta",
+      "protein": 35,
+      "fat": 15,
+      "carbs": 55,
+      "weight": 350
+    },
+    {
+      "name": "Black Bean and Quinoa Salad",
+      "protein": 25,
+      "fat": 10,
+      "carbs": 50,
+      "weight": 200
+    }
+]

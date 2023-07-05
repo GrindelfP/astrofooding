@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import to.grindelf.astrofooding.utility.SimplexToolkit
+import to.grindelf.astrofooding.utility.SimplexToolkit.SolutionBoundaries
 import java.io.File
 
 /**
@@ -12,6 +13,7 @@ import java.io.File
 class DietProcessor(
     private val astronaut: Astronaut
 ) {
+
     /**
      * Amount of macronutrients that are optimal for the astronaut
      */
@@ -20,7 +22,7 @@ class DietProcessor(
     /**
      * Menu file
      */
-    private val menuFile = File("src/main/resources/menus/menu2.json")
+    private val menuFile = File("src/main/resources/menus/menu3.json")
 
     companion object {
 
@@ -32,6 +34,9 @@ class DietProcessor(
          * microgravity)
          */
         private const val ACTIVITY_FACTOR = 1.725
+
+        private const val MINIMAL_MEAL_COUNT = 0.0
+        private const val MAXIMAL_MEAL_COUNT = 2.0
     }
 
     /**
@@ -52,16 +57,17 @@ class DietProcessor(
      * @return Results
      */
     fun calculateOptimalDiet(): Diet {
-        val limits = initializeLimits() // declare limits for each macronutrient
-        val menu = getMenu() // read menu from JSON file
-        val matrix = initializeMatrix(menu) // declare matrix of macronutrients for each meal of the menu
-        val simplexSolutions = SimplexToolkit.solve(matrix, limits, getMinimizers(menu)) // solve the problem
-        require(simplexSolutions != null) { "The problem has no feasible solution" }
-
-        // TODO: debug
-        println("Simplex solutions: $simplexSolutions")
-
-        val mealsByQuantity = getQuantifiedMeals(simplexSolutions) // create a list of meals with their quantities
+        val limits = initializeLimits()
+        val menu = getMenu()
+        val matrix = initializeMatrix(menu)
+        val simplexSolutions = SimplexToolkit.solve(
+            matrix,
+            limits,
+            getMinimizers(menu),
+            SolutionBoundaries(lowerBound = MINIMAL_MEAL_COUNT, upperBound = MAXIMAL_MEAL_COUNT)
+        )
+        val mealsByQuantity =
+            getQuantifiedMeals(simplexSolutions).filter { meal -> meal.quantity > 0 }
 
         return Diet(
             astronaut = astronaut,
@@ -126,44 +132,11 @@ class DietProcessor(
 
     /**
      * Initializes matrix of macronutrients for each meal of the menu for further simplex calculations
-     *//*
-    private fun initializeMatrix(menu: List<Meal>): List<List<Double>> {
-        val matrix = mutableListOf<List<Double>>()
-
-        val listOfProteins = mutableListOf<Double>()
-
-        menu.forEach {meal ->
-            listOfProteins.add(meal.protein)
-        }
-
-        matrix.add(listOfProteins)
-
-        val listOfFats = mutableListOf<Double>()
-
-        menu.forEach {meal ->
-            listOfFats.add(meal.fat)
-        }
-
-        matrix.add(listOfFats)
-
-        val listOfCarbs = mutableListOf<Double>()
-
-        menu.forEach {meal ->
-            listOfCarbs.add(meal.carbs)
-        }
-
-        matrix.add(listOfCarbs)
-
-        return matrix
-    }*/
-
-    /**
-     * Initializes matrix of macronutrients for each meal of the menu for further simplex calculations
      */
     private fun initializeMatrix(menu: List<Meal>): List<List<Double>> {
         val matrix = mutableListOf<List<Double>>()
 
-        menu.forEach {meal ->
+        menu.forEach { meal ->
             matrix.add(listOf(meal.protein, meal.fat, meal.carbs))
         }
 
@@ -175,7 +148,7 @@ class DietProcessor(
      */
     private fun getMinimizers(menu: List<Meal>): List<Double> {
         val minimizers = mutableListOf<Double>()
-        menu.forEach {meal ->
+        menu.forEach { meal ->
             minimizers.add(meal.weight)
         }
         return minimizers
