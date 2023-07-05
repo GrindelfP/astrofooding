@@ -20,7 +20,7 @@ class DietProcessor(
     /**
      * Menu file
      */
-    private val menuFile = File("src/main/resources/menus/menu1.json")
+    private val menuFile = File("src/main/resources/menus/menu2.json")
 
     companion object {
 
@@ -57,6 +57,10 @@ class DietProcessor(
         val matrix = initializeMatrix(menu) // declare matrix of macronutrients for each meal of the menu
         val simplexSolutions = SimplexToolkit.solve(matrix, limits, getMinimizers(menu)) // solve the problem
         require(simplexSolutions != null) { "The problem has no feasible solution" }
+
+        // TODO: debug
+        println("Simplex solutions: $simplexSolutions")
+
         val mealsByQuantity = getQuantifiedMeals(simplexSolutions) // create a list of meals with their quantities
 
         return Diet(

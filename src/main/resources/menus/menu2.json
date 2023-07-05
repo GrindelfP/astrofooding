@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Mashed potatoes",
+    "protein": 25,
+    "fat": 42,
+    "carbs": 147,
+    "weight": 300
+  },
+  {
+    "name": "Meat cutlet",
+    "protein": 10,
+    "fat": 18,
+    "carbs": 6,
+    "weight": 100
+  },
+  {
+    "name": "Beef stake",
+    "protein": 190,
+    "fat": 50,
+    "carbs": 0,
+    "weight": 500
+  },
+  {
+    "name": "Roasted pork",
+    "protein": 106,
+    "fat": 209,
+    "carbs": 7,
+    "weight": 450
+  }
+]
