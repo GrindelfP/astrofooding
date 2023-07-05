@@ -1,5 +1,6 @@
 package to.grindelf.astrofooding.service
 
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -13,6 +14,7 @@ import to.grindelf.astrofooding.domain.Diet
 @RequestMapping("/optimal-diet")
 class Controllers {
 
+    @CrossOrigin
     @GetMapping
     fun getOptimalDiet(
             @RequestParam name: String,
