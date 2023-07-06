@@ -18,11 +18,18 @@ class Controllers {
     @GetMapping
     fun getOptimalDiet(
             @RequestParam name: String,
-            @RequestParam age: Int,
-            @RequestParam weight: Int,
-            @RequestParam height: Int,
+            @RequestParam age: Double,
+            @RequestParam weight: Double,
+            @RequestParam height: Double,
             @RequestParam gender: String
     ): Diet {
+
+        println("name: $name, ${name::class.java.simpleName}")
+        println("age: $age, ${age::class.java.simpleName}")
+        println("weight: $weight, ${weight::class.java.simpleName}")
+        println("height: $height, ${height::class.java.simpleName}")
+        println("gender: $gender, ${gender::class.java.simpleName}")
+
         val astronaut = Astronaut(name, age, weight, height, gender)
         val dietProcessor = DietProcessor(astronaut)
 
@@ -33,9 +40,9 @@ class Controllers {
     @GetMapping("/test-astronaut")
     fun testAstronaut(
             @RequestParam name: String,
-            @RequestParam age: Int,
-            @RequestParam weight: Int,
-            @RequestParam height: Int,
+            @RequestParam age: Double,
+            @RequestParam weight: Double,
+            @RequestParam height: Double,
             @RequestParam gender: String
     ): Astronaut {
         return Astronaut(name, age, weight, height, gender)
@@ -45,9 +52,9 @@ class Controllers {
     @GetMapping("/test-components")
     fun testMacronutrients(
             @RequestParam name: String,
-            @RequestParam age: Int,
-            @RequestParam weight: Int,
-            @RequestParam height: Int,
+            @RequestParam age: Double,
+            @RequestParam weight: Double,
+            @RequestParam height: Double,
             @RequestParam gender: String
     ): Macronutrients {
         val astronaut = Astronaut(name, age, weight, height, gender)

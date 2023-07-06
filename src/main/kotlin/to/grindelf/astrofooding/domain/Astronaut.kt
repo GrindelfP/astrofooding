@@ -2,8 +2,8 @@ package to.grindelf.astrofooding.domain
 
 data class Astronaut(
         val name: String,
-        val age: Int,
-        val weight: Int,
-        val height: Int,
+        val age: Double,
+        val weight: Double,
+        val height: Double,
         val gender: String
 )
